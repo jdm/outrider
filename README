@@ -1,0 +1,5 @@
+Dashboarding tools for analyzing Mozilla repositories
+
+* generate_emails.py - generates a list of all email addresses listed in the MoCo phonebook, given proper LDAP authorization
+* leverage.py - spits out a leverage.csv containing counts for employees and volunteers for each revision range specified in `ffreleases`
+* leverage.r - generates an SVG plot of levereage.csv
