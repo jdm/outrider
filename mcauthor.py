@@ -18,7 +18,9 @@ def walk_changesets(repo, start, end, path_filter):
         pats = () if not path_filter else ['path:%s' % path_filter]
         opts = {'rev': [to_rev + ':' + from_rev]}
         matchfn = match.match(repo.root, repo.getcwd(), pats)
-        for rev in cmdutil.walkchangerevs(repo, matchfn, opts, prep):        
+        def prep(ctx, fns):
+            pass
+        for rev in cmdutil.walkchangerevs(repo, matchfn, opts, prep):
             yield {'msg': rev.description(),
                    'author': str(rev.user()).decode('utf-8')}
 
