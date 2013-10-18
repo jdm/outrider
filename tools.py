@@ -5,13 +5,13 @@ import re
 
 def walk_changesets(repo, start, end, path_filter):
     if isinstance(repo, git.Repo):
-        paths = [path_filter] if path_filter else []
+        paths = path_filter if path_filter else []
         for commit in repo.iter_commits(rev='%s..%s' % (end, start), paths=paths):
             yield {'msg': commit.message,
                    'author': '%s <%s>' % (commit.author.name,
                                           commit.author.email)}
     else: 
-        pats = () if not path_filter else ['path:%s' % path_filter]
+        pats = () if not path_filter else ['path:%s' % path for path in path_filter]
         opts = {'rev': [start + ':' + end]}
         matchfn = match.match(repo.root, repo.getcwd(), pats)
         def prep(ctx, fns):
